@@ -1,0 +1,13 @@
+# R code for creating Randmonn Sampling
+
+#Initialize a matrix called Z 
+Z <- NULL
+
+#Create a loop build samples and assign mean onto Z values
+
+for (i in 1:100){
+Z[i] = mean(rnorm(50,1,.3))
+}
+Z
+
+# output would be 100 value array with normal distribution value (ranging from .7 to 1.3) 
