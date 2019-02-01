@@ -1,0 +1,18 @@
+Comments:
+Exercism was introduced by a friend as a way to explore and test code running. Here are the tests and my code solutions.
+Any feedback is welcome @ sidharthoomman--gmail.com 
+
+
+Exercise 1: (Easy)
+Write a function that returns the string "Hello, World!".
+
+First we must define a function, then call the function for the function to work. This is the basis of objected oriented programming
+
+#defining the function
+def exercise1():
+  print("Hello World")
+
+#calling the function
+exercises1()
+
+ 
