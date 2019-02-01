@@ -13,6 +13,10 @@ def exercise1():
   print("Hello World")
 
 #calling the function
-exercises1()
+exercise1()
 
+Output Looks:
+Hello World
+
+Exercise 2:
  
