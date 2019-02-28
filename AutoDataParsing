@@ -1,0 +1,176 @@
+
+''' Developed By: Sidharth Oommen; Date :2/28/2019; Code: This code will parse and compress a data file with missing data into a Panda inputable 
+(Python) data file for performing machine learning. You can use it for doing any sort of regression analysis '''
+
+''' Completing Rate: 50%; Last Updated 2/28/2019'''
+
+''' Enviournment: Python ''''
+
+
+# Step 1 import file 
+#importing numpy for checking datatype of a cell
+import numpy
+import pandas as pd
+file = 'Model2.xlsx'
+datax = pd.read_excel(file)
+datax_frame = pd.DataFrame(datax)
+
+
+# Step 1 : QA - Check if d
+datax.head()
+datax_frame.head()
+
+# Step 2 collect data into an list of various coloums
+#data_list (Column number, name, data, missing data, correlation with Y)
+data_list = [(0,"",0,0,0)]
+# Step 2 : QA data_list load 
+data_list[0]
+
+ 
+# Step 3a Extracting data from datax file
+data_list[0][1]
+x = datax_frame.size
+num_cols = len(datax_frame.columns)
+num_rows = len(datax_frame.index)
+## a=data_list.dtype
+# Step 3a QA 
+num_rows
+num_cols
+
+'''' *** Issue - learn list assignment - this is being created as a tuple *** ''''
+## Step 3bAppeneding Column number and name, creating blank list file
+x = 0
+while (x < num_rows):
+    
+    data_list.append([x,"",0,0,0])
+    x = x + 1
+#QA for Step 3b
+data_list[4][0]
+# Step 3c - Appending column name 
+
+# while (y < num_rows):
+x = data_list[0][0]
+y = datax_frame.iloc[0,0]
+# erroring out append with this loop - check if vairables are passing through 
+
+z = 0
+while(z<num_cols):
+    x = data_list[z][0] # taking the 1st col from new array for reinsert
+    y = datax_frame.columns[z] #taking the column name  
+    print("Value of z is:", z)
+    print("Value of x is:", x)
+    print("Value of y is:", y)
+    data_list.pop(z)
+    data_list.append([x,y,0,0,0])# appending column name
+    data_list.sort()
+    z = z + 1 
+
+
+
+x = data_list[z][0]
+y = datax_frame.columns[z]
+print("Value of z is:", z)
+print("Value of y is:", x)
+print("Value of x is:", y)
+data_list.pop(z)
+data_list.append([x,y,0,0,0]) # appending column name
+print(data_list[z])
+   # z = z + 1 
+   
+z=0 
+while (z < num_cols):
+    x = data_list[z][0]
+    y = datax_frame.columns[z]
+    print("Value of z is:", z)
+    print("Value of y is:", x)
+    print("Value of x is:", y)
+    data_list.pop(z)
+    data_list.append([x,y,0,0,0]) # appending column name
+    data_list.sort()
+    print(data_list[z])
+    z = z + 1 
+
+#QA for appending column name 
+data_list[40][1]    
+    while(y < num_cols):
+        y = y + 1
+        temp=datax_frame[x][y]
+        if datax_frame[x][y] is not null:
+          isinstance(temp, int) is True:
+                 data_list[x][2]="int"
+              elif:
+                  isinstance(x, float) is True:
+                      datax_frame[x][2]="float"
+                  elif:
+                      isinstance(x, str) is True:
+                          datax_frame[x][2]="String"
+                          # Loop to check if rest of the function is the same
+                          # What about date?
+        
+                          
+                
+# Null counter 
+z = 0 # null counter
+x = 0               
+while (x < num_rows):
+    y = 0    
+    while(y < num_cols):
+        temp = datax_frame[x][y]
+        if datax_frame[x][y] is null:
+            z = z + 1
+        y=y+1
+        return z
+    data_list[x][3]=z
+    x=x+1
+    return
+
+# Correlation Step 
+x=0
+y=0
+z=0
+
+# loop to create all possible list combinations and correlation 
+import pandas as pd # pandas has a correlation documents
+while (x < num_cols):
+     
+     while (y < num_rows):
+         new_list.append(dataframe[1][y],dataframe[x][y])
+         y=y+1
+         return
+
+    
+     x=x+1
+     return
+ # Makes sure new_list has columns seperated out as  columns = ['Sentence','Score'])
+             '''
+             df = pd.DataFrame([ ["hello there", 100],
+                            ["hello kid",   95],
+                    ["there kid",   5]
+                    ], columns = ['Sentence','Score'])
+            '''
+            
+# get dummies converts categorial vairables into dummy variables
+# https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html
+#https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html
+# s_corr gives another list -so choose the max from it and set the condition
+# get_dummies prints out dummy values that can be held out for correlation analysis
+#dummy_na is True 
+# Score/Score Max gives correlation for dummy values 
+
+# run this inside the loop
+    import pandas as pd    
+    s_corr = df.col_2.str.get_dummies(dummy_na=True)).corrwith(df.Score/df.Score.max())
+    corr_max=max(Score[1])
+    append.data_arary[y][4] = corr_max
+        else appen
+        
+    # step thatchecks if the correlation is higher
+
+
+#Step 4 cleaning up the data: 
+#data_list (Column number, name, data, missing data, correlation with Y)
+x = 0
+while (x<n_rows):
+    if (data_list[x][2]/data_list[x][3] <0.25): #deleting column with less than 25 %data
+        d
+            
