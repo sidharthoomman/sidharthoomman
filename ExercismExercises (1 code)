@@ -14,9 +14,20 @@ def exercise1():
 
 #calling the function
 exercise1()
-
+------------------------
 Output Looks:
 Hello World
+--------------------------------------------------------------------------------------------------------------------------------------
+#Exercise 2:
 
-Exercise 2:
- 
+#Soluton
+def two_fer(x='you'):
+    if isinstance(x,str) is True:
+        return("One for {}, one for me.".format(x))
+
+Output Looks: 
+-----------------------
+two_fer('Sidharth')
+Out[3]: 'One for Sidharth, one for me.'
+-----------------------------------------------------------------------------------------------------------------------------------------
+#Exercise 3:
