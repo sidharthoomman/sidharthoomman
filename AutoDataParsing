@@ -6,171 +6,146 @@
 
 ''' Enviournment: Python ''''
 
+#datax = pd.read_excel(file_,sheet_name='Sheet1',header=0,converters={'Index' : int,
+#'Score' : int,
+
 
 # Step 1 import file 
-#importing numpy for checking datatype of a cell
+#importing numpy for checking datatype of a 
+#data_list (Column number, name, data, missing data, correlation with Y)
 import numpy
 import pandas as pd
 file = 'Model2.xlsx'
-datax = pd.read_excel(file)
+datax = pd.read_excel(file,sheet_name='Sheet1')
 datax_frame = pd.DataFrame(datax)
+num_cols = len(datax_frame.columns)
+num_rows = len(datax_frame.index)
+del data_list
+data_list = []
 
-
+datax_frame.dtypes
+    # ---------------------------------------------------------------------- #
+# Data Type Check - goes column by column 
+# manually input datatype of each column 
+#data_list (Column number, name, data_type, data, missing data, correlation with Y)
+data_backup = pd.DataFrame()
+x = 0
+y = 0
+x=x+1
+# counter to check if there are more than 1 datatype
+              # ------------------------------------------------------------------------ # 
 # Step 1 : QA - Check if d
 datax.head()
 datax_frame.head()
 
-# Step 2 collect data into an list of various coloums
-#data_list (Column number, name, data, missing data, correlation with Y)
-data_list = [(0,"",0,0,0)]
-# Step 2 : QA data_list load 
-data_list[0]
+data_list
 
- 
-# Step 3a Extracting data from datax file
-data_list[0][1]
-x = datax_frame.size
-num_cols = len(datax_frame.columns)
-num_rows = len(datax_frame.index)
-## a=data_list.dtype
-# Step 3a QA 
-num_rows
-num_cols
+## data_para is a function that returns the paramets of a data file as data_list
+def data_para(datax_frame_data_list):
+    return(data_para012(datax_frame,data_list))
 
-'''' *** Issue - learn list assignment - this is being created as a tuple *** ''''
-## Step 3bAppeneding Column number and name, creating blank list file
-x = 0
-while (x < num_rows):
+def data_para012(datax_frame,data_list):
+    z = 0
+    while(z < num_cols):
+        y = datax_frame.columns[z]   
+        print("Value of z is:", z) # col_index
+        print("Value of y is:", y) #col_num
+        # manually inputting datatype of a col
+        data_list.append([z,y,data[z],0,0,0])# appending column name
+        z = z + 1 
+    return(data_para34(datax_frame,data_list))
+
+
+def data_para34(datax_frame,data_list):
+    z = 0 # null counter
+        x = 0               
+        while (x < num_rows):
+            y = 0    
+                while(y < num_cols):
+                    temp = datax_frame[x][y]
+                        if datax_frame[x][y] is null:
+                            z = z + 1
+                            y=y+1
+        temp=data_list[x]
+        not_null=num_cols-z
+        data_list.pop([x])
+        data_list.append([temp[0],temp[1],temp[2],z,not_null,0])
+        x=x+1
+    return(data_para5(datax_frame,data_list)
+
+
+
+def data_para5(datax_frame,data_list):
+        x=0  # col counter
+        y=0  # row counter
+        while(x<num_cols):
     
-    data_list.append([x,"",0,0,0])
-    x = x + 1
-#QA for Step 3b
-data_list[4][0]
-# Step 3c - Appending column name 
+            df=pd.DataFrame(columns = "Y","X")
+            while(y<num_rows):
+                a = datax_frame[x][1]
+                b = data_frame[x][0] 
+                dtypea=data_list[x][3] # checking if the datatype of the column is same
+                if (a!='' and a!='Nil' and a!='No_data' and a.dtypes=dtypea):
+                    if (b!='' and b!='Nil' and b!='No_data' and a.dtypes=dtypea):
+                        df.append([a,b])
+                s_corr = df.X.str.get_dummies(dummy_na=True)).corrwith(df.Score/df.Score.max())
+                temp=data_list[x]
+                data_list.pop([x])
+                data_list.append([temp[0],temp[1],temp[2],temp[3],temp[4],s_corr])
+                x=x+1)
+        return(data_list)
+  
+#Step 4 cleaning up the data: 
 
-# while (y < num_rows):
-x = data_list[0][0]
-y = datax_frame.iloc[0,0]
-# erroring out append with this loop - check if vairables are passing through 
-
-z = 0
-while(z<num_cols):
-    x = data_list[z][0] # taking the 1st col from new array for reinsert
-    y = datax_frame.columns[z] #taking the column name  
-    print("Value of z is:", z)
-    print("Value of x is:", x)
-    print("Value of y is:", y)
-    data_list.pop(z)
-    data_list.append([x,y,0,0,0])# appending column name
-    data_list.sort()
-    z = z + 1 
-
-
-
-x = data_list[z][0]
-y = datax_frame.columns[z]
-print("Value of z is:", z)
-print("Value of y is:", x)
-print("Value of x is:", y)
-data_list.pop(z)
-data_list.append([x,y,0,0,0]) # appending column name
-print(data_list[z])
-   # z = z + 1 
-   
-z=0 
-while (z < num_cols):
-    x = data_list[z][0]
-    y = datax_frame.columns[z]
-    print("Value of z is:", z)
-    print("Value of y is:", x)
-    print("Value of x is:", y)
-    data_list.pop(z)
-    data_list.append([x,y,0,0,0]) # appending column name
-    data_list.sort()
-    print(data_list[z])
-    z = z + 1 
-
-#QA for appending column name 
-data_list[40][1]    
-    while(y < num_cols):
-        y = y + 1
-        temp=datax_frame[x][y]
-        if datax_frame[x][y] is not null:
-          isinstance(temp, int) is True:
-                 data_list[x][2]="int"
-              elif:
-                  isinstance(x, float) is True:
-                      datax_frame[x][2]="float"
-                  elif:
-                      isinstance(x, str) is True:
-                          datax_frame[x][2]="String"
-                          # Loop to check if rest of the function is the same
-                          # What about date?
-        
-                          
-                
-# Null counter 
-z = 0 # null counter
-x = 0               
-while (x < num_rows):
-    y = 0    
-    while(y < num_cols):
-        temp = datax_frame[x][y]
-        if datax_frame[x][y] is null:
-            z = z + 1
-        y=y+1
-        return z
-    data_list[x][3]=z
-    x=x+1
-    return
-
-# Correlation Step 
+#data_list (Column number, name,data_type, data, missing data, correlation with Y) 
+#dropping empty columns with less than 25% data
+def crop_data(data_frame,data_list):
+    temp=data_frame
+    while (x<n_nrows):
+        if (data_list[x][3] / num_col <0.25):#deleting column with less than 25 %data
+          temp.drop(data_list[1],axis=1)
+          if(data_list[5]<0.3):
+         temp.drop(data_list[1],axis=1)
+     x=x+1
+     
+data_list=def()
+#dropping columns with less than 50% data and low - correlation
+while (x<n_cols):
+    if ((data_list[x][3] / num_col) <0.5 and data_list[x][5]<0.4):#deleting column with less than 25 %data
+          data_frame.drop(data_list[1],axis=1)
+          
+     if(data_list[5]<0.3):
+         data_frame.drop(data_list[1],axis=1)
+     x=x+1
+     
+     
+# sorting and dropping the excel file 
+def crop_data(data_frame,data_list):
+    x=o
+    y=o
+    while (x<n_rows):
+        x=x+1
+        while(y<n_cols):
+            y=y+1
+            if(data_frame[x][y]=
+     
+#deleting columns with 
+data_list
+# counter to check if there are more than 1 datatype
+# ------------------------------------------------------------------------ # 
+#-------------------------------------------------------------------------#
+# CODE JUNKYARD
 x=0
 y=0
-z=0
+def fun1(y,x):
+    return(fun2(y,x))
 
-# loop to create all possible list combinations and correlation 
-import pandas as pd # pandas has a correlation documents
-while (x < num_cols):
-     
-     while (y < num_rows):
-         new_list.append(dataframe[1][y],dataframe[x][y])
-         y=y+1
-         return
+def fun2(y,x):
+    z=[x[0],x[1],x[2]+y[2],x[3]+y[3]]
+    x=z
+    return(x)
 
-    
-     x=x+1
-     return
- # Makes sure new_list has columns seperated out as  columns = ['Sentence','Score'])
-             '''
-             df = pd.DataFrame([ ["hello there", 100],
-                            ["hello kid",   95],
-                    ["there kid",   5]
-                    ], columns = ['Sentence','Score'])
-            '''
-            
-# get dummies converts categorial vairables into dummy variables
-# https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html
-#https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html
-# s_corr gives another list -so choose the max from it and set the condition
-# get_dummies prints out dummy values that can be held out for correlation analysis
-#dummy_na is True 
-# Score/Score Max gives correlation for dummy values 
+y=[0,1,2,3]
+x=[1,0,0,0]
+ 
 
-# run this inside the loop
-    import pandas as pd    
-    s_corr = df.col_2.str.get_dummies(dummy_na=True)).corrwith(df.Score/df.Score.max())
-    corr_max=max(Score[1])
-    append.data_arary[y][4] = corr_max
-        else appen
-        
-    # step thatchecks if the correlation is higher
-
-
-#Step 4 cleaning up the data: 
-#data_list (Column number, name, data, missing data, correlation with Y)
-x = 0
-while (x<n_rows):
-    if (data_list[x][2]/data_list[x][3] <0.25): #deleting column with less than 25 %data
-        d
-            
