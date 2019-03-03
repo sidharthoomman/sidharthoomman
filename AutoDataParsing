@@ -129,23 +129,3 @@ def crop_data(data_frame,data_list):
             y=y+1
             if(data_frame[x][y]=
      
-#deleting columns with 
-data_list
-# counter to check if there are more than 1 datatype
-# ------------------------------------------------------------------------ # 
-#-------------------------------------------------------------------------#
-# CODE JUNKYARD
-x=0
-y=0
-def fun1(y,x):
-    return(fun2(y,x))
-
-def fun2(y,x):
-    z=[x[0],x[1],x[2]+y[2],x[3]+y[3]]
-    x=z
-    return(x)
-
-y=[0,1,2,3]
-x=[1,0,0,0]
- 
-
