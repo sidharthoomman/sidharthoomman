@@ -2,16 +2,15 @@
 # https://machinelearningmastery.com/machine-learning-in-python-step-by-step/
 """
 Created on Mon Feb 18 14:49:29 2019
-
+Notes: 11:55 PM 
 @author: User
 """
-## Importing Libraries 
-# Load libraries
+
 import sys
 import scipy
 import numpy
 import matplotlib
-import pandas
+import pandas 
 from pandas.plotting import scatter_matrix
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
@@ -25,16 +24,75 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
-#\
-# importing data as pandas
+
 # https://www.dataquest.io/blog/excel-and-pandas/
 location = 'Model13_.xlsx'
-dataset = pandas.read_excel(location)
-dataset.head()
-dataset_new = pd.DataFrame(dataset)
-Y = dataset_new.iloc[:, 0:1]
-X = dataset_new.iloc[:, 1:13]
+data = pandas.read_excel(location)
+data.head()
+df = pd.DataFrame(data)
+df1=[]
+df.columns[1]
+num_cols = len(df.columns)
+num_rows = len(df.index)
+# Add datacolumns for converting text to dummy variables in python
 
+#loop to limit max length of a column
+df.columns
+while (c in df.columns):   
+    df_col_len = int(df[c].str.encode(encoding='utf-8').str.len().max())
+    df_col_len        
+x=0
+df_col_len=[0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+df_col_len[2] = int(df['CUSTOMER_LOCATION'].str.encode(encoding='utf-8').str.len().max())
+df_col_len[3] = int(df['CUSTOMER_LANGUAGE'].str.encode(encoding='utf-8').str.len().max())
+df_col_len[4] = int(df['BRAND'].str.encode(encoding='utf-8').str.len().max())
+df_col_len[5] = int(df['ZONE'].str.encode(encoding='utf-8').str.len().max())
+df_col_len[6] = int(df['CIRCLE'].str.encode(encoding='utf-8').str.len().max())
+df_col_len[7] = int(df['REASON_FOR_CALL'].str.encode(encoding='utf-8').str.len().max())
+df_col_len[8] = int(df['REASON_FOR_CALL_SUBTYPE'].str.encode(encoding='utf-8').str.len().max())
+df_col_len
+
+df.iloc[3][4]
+while(x<num_cols):
+    if df_col_len[x]>20:
+        df.drop(df.columns[[x]], axis = 1, inplace=True) # axis 1 for columns
+    x=x+1
+####Thumbs up #################
+isinstance(df.columns[1],(str,object))
+df.columns[1].dtype
+x=0
+y=0
+df2=pd.DataFrame()
+num_cols = len(df.columns)
+while(x<num_cols):
+    if(isinstance(df.iloc[x][2],(str,object))):
+        y=y+1
+    x=x+1
+y
+import pandas as pd
+pd.concat([pd.get_dummies(df.)], axis=1, keys=df.columns)
+    
+
+export_csv = df2.to_csv (r'C:\Users\User\df3.csv', index = None, header=True)
+
+df3=pd.concat([pd.get_dummies(df2, columns=['CUSTOMER_LANGUAGE','CIRCLE','REASON_FOR_CALL','REASON_FOR_CALL_SUBTYPE'])], axis=1, keys=df2.columns)
+df3
+export_csv = df3.to_csv(r'C:\USers\User\af.csv', index = None, header=True)
+
+# Start loop for columns
+dataset_new = pd.DataFrame(af)
+num_cols = len(dataset_new.columns)
+num_rows = len(dataset_new.index)
+num_rows
+num_cols
+# remove text variables
+
+
+Y = dataset_new.iloc[:, 0:1]
+X = dataset_new.iloc[:, 1:265]
+
+
+#####################Thumbsup################################
 validation_size = 0.20
 seed=7
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
@@ -101,4 +159,22 @@ for name, model in models:
 	results.append(cv_results)
 	names.append(name)
 	msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
-	print(msg)
+    
+
+# Code Junk Yard
+import pandas as pd    
+    s_corr = df.col_2.str.get_dummies(dummy_na=True)).corrwith(df.Score/df.Score.max())
+    corr_max=max(Score[1])
+    append.data_arary[y][4] = corr_max
+        else appen
+
+x=0
+y=0
+df2 = pandas.read_csv('df2.csv')
+df2=pd.DataFrame(df2)
+num_cols = len(df2.columns)
+while(x<num_cols):
+    if(isinstance(df.iloc[x][2],(str,object))):
+        pd.concat([pd.get_dummies(df2.columns['CUSTOMER_LOCATION','ZONE','BRAND','CUSTOMER_LANGUAGE','CIRCLE','REASON_FOR_CALL','REASON_FOR_CALL_SUBTYPE'])], axis=1, keys=df.columns)
+    x=x+1
+        
