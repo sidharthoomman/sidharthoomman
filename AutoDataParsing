@@ -1,48 +1,38 @@
+#Goal of this parsing is to pass on an excel file from Vodaphone and then parase a df
+# that can be inputed into python modelling
+# this script is broken down into 5 main functions
+# Function 1- data_parse - runs functions 2-6  inputs the datafile
+# Issues : 
+# Function 2- data_para inputs datafile and returns Functions 3-6 that pulls out the data
+# Function 3 - data_para012 sub function of data_para - inputs data_file from data_para and outputs first two indicators of file
+# Function 4- data_para034 subfunction - loads nulls
+#Function 5 - data_para5 subfunction -returns correlation values between a particular column 
+# Function 6- crop _data - based on input parameters it deletes unnecessary values
 
-''' Developed By: Sidharth Oommen; Date :2/28/2019; Code: This code will parse and compress a data file with missing data into a Panda inputable 
-(Python) data file for performing machine learning. You can use it for doing any sort of regression analysis '''
+# Notes: Need to add a function to adjust column names
+# Function needs to have a general passer instead of individual passer
+# only run correlation for int files
 
-''' Completing Rate: 50%; Last Updated 2/28/2019'''
+#file = 'Model2.xlsx', sheet_name='Sheet1'
 
-''' Enviournment: Python ''''
-
-#datax = pd.read_excel(file_,sheet_name='Sheet1',header=0,converters={'Index' : int,
-#'Score' : int,
-
-
-# Step 1 import file 
-#importing numpy for checking datatype of a 
-#data_list (Column number, name, data, missing data, correlation with Y)
 import numpy
 import pandas as pd
-file = 'Model2.xlsx'
-datax = pd.read_excel(file,sheet_name='Sheet1')
-datax_frame = pd.DataFrame(datax)
-num_cols = len(datax_frame.columns)
-num_rows = len(datax_frame.index)
-del data_list
-data_list = []
+def data_parse(file,sheet_name):
+    import numpy
+    import pandas as pd
+    datax = pd.read_excel(file,sheet_name)
+    datax_frame = pd.DataFrame(datax)
+    data_list = []
+    return(datax_frame,data_para012(datax_frame,data_list))    
+#QA Notes:
+# Problems: 
 
-datax_frame.dtypes
-    # ---------------------------------------------------------------------- #
-# Data Type Check - goes column by column 
-# manually input datatype of each column 
-#data_list (Column number, name, data_type, data, missing data, correlation with Y)
-data_backup = pd.DataFrame()
-x = 0
-y = 0
-x=x+1
-# counter to check if there are more than 1 datatype
-              # ------------------------------------------------------------------------ # 
-# Step 1 : QA - Check if d
-datax.head()
-datax_frame.head()
 
-data_list
-
+'''
+QA Code: 
+datax_frame,data_list=data_parse('Model3.xls', sheet_name='Original_Data')
+'''
 ## data_para is a function that returns the paramets of a data file as data_list
-def data_para(datax_frame_data_list):
-    return(data_para012(datax_frame,data_list))
 
 def data_para012(datax_frame,data_list):
     z = 0
@@ -99,26 +89,24 @@ def data_para5(datax_frame,data_list):
 
 #data_list (Column number, name,data_type, data, missing data, correlation with Y) 
 #dropping empty columns with less than 25% data
-def crop_data(data_frame,data_list):
+def crop_data(data_frame,data_list,null_factor,cor_factor):
     temp=data_frame
     while (x<n_nrows):
-        if (data_list[x][3] / num_col <0.25):#deleting column with less than 25 %data
-          temp.drop(data_list[1],axis=1)
-          if(data_list[5]<0.3):
-         temp.drop(data_list[1],axis=1)
-     x=x+1
-     
-data_list=def()
-#dropping columns with less than 50% data and low - correlation
-while (x<n_cols):
-    if ((data_list[x][3] / num_col) <0.5 and data_list[x][5]<0.4):#deleting column with less than 25 %data
-          data_frame.drop(data_list[1],axis=1)
-          
-     if(data_list[5]<0.3):
-         data_frame.drop(data_list[1],axis=1)
-     x=x+1
-     
-     
+            a_nulls=(data_list[x][3] / num_col) 
+            b_corr=data_list[5]
+            if (a_nulls < null_factor or b_corr < cor_factor):
+                temp.drop(data_list[1],axis=1)
+            x=x+1
+    return(temp) 
+
+data_list=data_list(temp)
+temp=crop_data(data_frame,data_list,.3,.4)
+temp=crop_data(data_frame,data_list,.5,.4)
+temp=crop_data(data_frame,data_list,.7,.4)
+temp=crop_data(data_frame,data_list,.9,.4)
+temp=crop_data(data_frame,data_list,1,.4)
+data_frame=temp
+
 # sorting and dropping the excel file 
 def crop_data(data_frame,data_list):
     x=o
@@ -129,3 +117,34 @@ def crop_data(data_frame,data_list):
             y=y+1
             if(data_frame[x][y]=
      
+#deleting columns with 
+data_list
+# counter to check if there are more than 1 datatype
+# ------------------------------------------------------------------------ # 
+#-------------------------------------------------------------------------#
+# CODE JUNKYARD
+x=0
+y=0
+def fun1(y,x):
+    return(fun2(y,x))
+
+def fun2(y,x):
+    z=[x[0],x[1],x[2]+y[2],x[3]+y[3]]
+    x=z
+    return(x)
+
+y=[0,1,2,3]
+x=[1,0,0,0]
+ 
+
+
+
+            
+''' Notes: get dummies converts categorial vairables into dummy variables
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html
+s_corr gives another list -so choose the max from it and set the condition
+get_dummies prints out dummy values that can be held out for correlation analysis
+dummy_na is True 
+Score/Score Max gives correlation for dummy values 
+'''
