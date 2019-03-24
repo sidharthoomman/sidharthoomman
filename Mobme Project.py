@@ -10,7 +10,7 @@ import sys
 import scipy
 import numpy
 import matplotlib
-import pandas 
+import pandas as pd
 from pandas.plotting import scatter_matrix
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
@@ -26,7 +26,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 # https://www.dataquest.io/blog/excel-and-pandas/
-location = 'Model13_.xlsx'
+location = 'File.xlsx'
 data = pandas.read_excel(location)
 data.head()
 df = pd.DataFrame(data)
@@ -37,6 +37,7 @@ num_rows = len(df.index)
 # Add datacolumns for converting text to dummy variables in python
 
 #loop to limit max length of a column
+'''
 df.columns
 while (c in df.columns):   
     df_col_len = int(df[c].str.encode(encoding='utf-8').str.len().max())
@@ -57,6 +58,7 @@ while(x<num_cols):
     if df_col_len[x]>20:
         df.drop(df.columns[[x]], axis = 1, inplace=True) # axis 1 for columns
     x=x+1
+'''
 ####Thumbs up #################
 isinstance(df.columns[1],(str,object))
 df.columns[1].dtype
@@ -71,16 +73,16 @@ while(x<num_cols):
 y
 import pandas as pd
 pd.concat([pd.get_dummies(df.)], axis=1, keys=df.columns)
-    
 
-export_csv = df2.to_csv (r'C:\Users\User\df3.csv', index = None, header=True)
+df2=pd.concat([pd.get_dummies(df, columns=['PINCODE', 'AGENT_NETWORK','CELL_SITE_ID','TRANSACTION_DATE'])])
+export_csv = df2.to_csv (r'C:\Users\user\Desktop\df2.csv', index = None, header=True)
 
-df3=pd.concat([pd.get_dummies(df2, columns=['CUSTOMER_LANGUAGE','CIRCLE','REASON_FOR_CALL','REASON_FOR_CALL_SUBTYPE'])], axis=1, keys=df2.columns)
-df3
-export_csv = df3.to_csv(r'C:\USers\User\af.csv', index = None, header=True)
-
-# Start loop for columns
-dataset_new = pd.DataFrame(af)
+#df3=pd.concat([pd.get_dummies(df2, columns=['CUSTOMER_LANGUAGE','CIRCLE','REASON_FOR_CALL','REASON_FOR_CALL_SUBTYPE'])], axis=1, keys=df2.columns)
+#df3
+#export_csv = df3.to_csv(r'C:\USers\User\af.csv', index = None, header=True)
+location = 'df2.csv'
+data = pandas.read_csv(location)
+dataset_new = pd.DataFrame(data)
 num_cols = len(dataset_new.columns)
 num_rows = len(dataset_new.index)
 num_rows
@@ -88,16 +90,17 @@ num_cols
 # remove text variables
 
 
-Y = dataset_new.iloc[:, 0:1]
-X = dataset_new.iloc[:, 1:265]
+Y = dataset_new.iloc[:,7:8]
+X = dataset_new.iloc[:,8:4815]
 
-
+Y
+X
 #####################Thumbsup################################
 validation_size = 0.20
 seed=7
 X_train, X_validation, Y_train, Y_validation = model_selection.train_test_split(X, Y, test_size=validation_size, random_state=seed)
 
-
+'''
 #Summarizing the dataset
 #shape
 print(dataset.shape)
@@ -135,7 +138,7 @@ scatter_matrix(dataset)
 plt.show()
 
 dataset
-
+'''
 
 scoring = 'accuracy'
 
@@ -144,7 +147,7 @@ scoring = 'accuracy'
 # Spot Check Algorithms
 models = []
 models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
-models.append(('LDA', LinearDiscriminantAnalysis()))
+#models.append(('LDA', LinearDiscriminantAnalysis()))
 models.append(('KNN', KNeighborsClassifier()))
 models.append(('CART', DecisionTreeClassifier()))
 models.append(('NB', GaussianNB()))
@@ -153,28 +156,18 @@ models.append(('SVM', SVC(gamma='auto')))
 models
 results = []
 names = []
+output=[]
 for name, model in models:
 	kfold = model_selection.KFold(n_splits=10, random_state=seed)
-	cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
+	cv_results = model_selection.cross_val_score(model, X_train, Y_train.values.ravel(), cv=kfold, scoring=scoring)
 	results.append(cv_results)
 	names.append(name)
 	msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
-    
 
-# Code Junk Yard
-import pandas as pd    
-    s_corr = df.col_2.str.get_dummies(dummy_na=True)).corrwith(df.Score/df.Score.max())
-    corr_max=max(Score[1])
-    append.data_arary[y][4] = corr_max
-        else appen
 
-x=0
-y=0
-df2 = pandas.read_csv('df2.csv')
-df2=pd.DataFrame(df2)
-num_cols = len(df2.columns)
-while(x<num_cols):
-    if(isinstance(df.iloc[x][2],(str,object))):
-        pd.concat([pd.get_dummies(df2.columns['CUSTOMER_LOCATION','ZONE','BRAND','CUSTOMER_LANGUAGE','CIRCLE','REASON_FOR_CALL','REASON_FOR_CALL_SUBTYPE'])], axis=1, keys=df.columns)
-    x=x+1
-        
+fig = plt.figure()
+fig.suptitle('Alogirthm Comparison')
+ax = fig.add_subplot(111)
+plt.boxplot(results)
+ax.set_xticklabels(names)
+plt.show()
