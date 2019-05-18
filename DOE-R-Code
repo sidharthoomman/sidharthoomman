@@ -1,0 +1,59 @@
+> drives=read.table("drive shaft.txt")
+>y=as.numeric(c(drives[,4],drives[,5],drives[,6],drives[,7],drives[,8]))
+> run=rep(1:8,5)
+> ybar=sapply(split(y,run),mean)
+> s2=sapply(split(y,run),var)
+> A=rep(c(-1,1),c(4,4))
+> B=rep(rep(c(-1,1),c(2,2)),2)
+> C=rep(rep(c(-1,1),c(1,1)),4)
+> a=lm(ybar~(A+B+C)^3)
+> effybar=2*a$coef[-1]
+> halfnorm=function(eff)+ {+ + I=length(eff)
++ u=qnorm(.5+.5*(1:I-.5)/I)
++ saeff=sort(abs(eff))
++ plot(u,saeff,type="n",xlab="half-normal quantiles",ylab="absolute effects", main="Half-normal plot")
++ text(u,saeff,names(saeff))
++ halfnorm(effybar)
++ halfnorm=function(eff)
++ {
++ 
++ I=length(eff)
++ u=qnorm(.5+.5*(1:I-.5)/I)
++ saeff=sort(abs(eff))
++ plot(u,saeff,type="n",xlab="half-normal quantiles",ylab="absolute effects", main="Half-normal plot")
++ text(u,saeff,names(saeff))
++ }
++ > 
+> halfnorm=function(eff)
++ {
++ 
++ I=length(eff)
++ u=qnorm(.5+.5*(1:I-.5)/I)
++ saeff=sort(abs(eff))
++ plot(u,saeff,type="n",xlab="half-normal quantiles",ylab="absolute effects", main="Half-normal plot")
++ text(u,saeff,names(saeff))
++ }
+> halfnorm(effybar)
+> a=lm(ybar~B+C)
+> summary(a)
+Call:
+lm(formula = ybar ~ B + C)
+Residuals:
+   1  2 3     4 5 6     7 8 
+10.04  0.52 -0.88  2.36 -7.00 -3.56 -2.16  0.68 
+Coefficients:
+           Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   65.420 2.087  31.347 6.2e-07 ***
+B             -6.800 2.087  -3.258 0.0225 * 
+C              7.300 2.087   3.498 0.0173 * 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 
+Residual standard error: 5.903 on 5 degrees of freedom
+Multiple R-squared: 0.8205,     Adjusted R-squared: 0.7487 
+F-statistic: 11.43 on 2 and 5 DF,  p-value: 0.01365 
+> a=lm(log(s2)~(A+B+C)^3)
+> effs2=2*a$coef[-1]
+> halfnorm(effs2)
+> a=lm(log(s2)~A)
+> summary(a)
+
