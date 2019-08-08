@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Aug  8 01:46:18 2019
+
+@author: Sidharth
+
+
+"""
+
+# start of modellign to get July 2018 temperatures 
+import numpy as np
+import sys
+import pandas as pd
+from pandas import DataFrame
+from sklearn import linear_model
+from sklearn.linear_model import LogisticRegression
+import statsmodels.api as sm
+
+location = 'Enmax.xlsx'
+data = pd.read_excel(location)
+df = pd.DataFrame(data)
+df2=pd.concat([pd.get_dummies(df, columns=['Weekday','Month','Year'])])
+export_csv = df2.to_csv (r'C:\Users\Sidharth\Desktop\df2.csv', index = None, header=True)
+df2['TMP'] = df2['TMP'].astype(int)
+X = df2[['Weekday_Weekday','Weekday_Weekend','Month_1','Month_2','Month_3','Month_4','Month_5','Month_6','Month_7','Month_8','Month_9','Month_10','Month_11','Month_12','Year_2017','Year_2018'    ]]
+Y = df2['TMP']
+
+# with sklearn
+
+regr = linear_model.LinearRegression()
+regr.fit(X,Y)
+regr.score(X,Y)
+
+
+location = 'Predictionfile.xlsx'
+data3 = pd.read_excel(location)
+xnew= df3[['Weekday_Weekday','Weekday_Weekend','Month_1','Month_2','Month_3','Month_4','Month_5','Month_6','Month_7','Month_8','Month_9','Month_10','Month_11','Month_12','Year_2017','Year_2018'    ]]
+xnew
+ynew=regr.predict(xnew)
+ynew_array=np.array(ynew)
+ynew_df=pd.DataFrame(ynew)
+ynew_df.columns = ['TMP']
+# end of modelling to get July 2018 temperature 
+
+# start of modelling to get July 2018 demand 
+location = 'Enmax.xlsx'
+data = pd.read_excel(location)
+df = pd.DataFrame(data)
+num_cols = len(df.columns)
+num_rows = len(df.index)
+df2=pd.concat([pd.get_dummies(df, columns=['Weekday','Month','Year'])])
+export_csv = df2.to_csv (r'C:\Users\Sidharth\Desktop\df2.csv', index = None, header=True)
+X = df2[['TMP','Weekday_Weekday','Weekday_Weekend','Month_1','Month_2','Month_3','Month_4','Month_5','Month_6','Month_7','Month_8','Month_9','Month_10','Month_11','Month_12','Year_2017','Year_2018'    ]]
+Y = df2['ACTUAL_DEMAND']
+
+regr = linear_model.LinearRegression()
+regr.fit(X,Y)
+regr.score(X,Y)
+location = 'Predictionfile.xlsx'
+data3 = pd.read_excel(location)
+data3
+ynew_df
+xnew= pd.concat([ynew_df,data3[['Weekday_Weekday','Weekday_Weekend','Month_1','Month_2','Month_3','Month_4','Month_5','Month_6','Month_7','Month_8','Month_9','Month_10','Month_11','Month_12','Year_2017','Year_2018']]],axis=1)
+xnew
+
+
+df.to_csv(file_name, sep='\t')
+xnew= df3[['Weekday_Weekday','Weekday_Weekend','Month_1','Month_2','Month_3','Month_4','Month_5','Month_6','Month_7','Month_8','Month_9','Month_10','Month_11','Month_12','Year_2017','Year_2018'    ]]
+xnew
+ynew=regr.predict(xnew)
+ynew_df=pd.DataFrame(ynew)
+export_csv = ynew_df.to_csv (r'C:\Users\Sidharth\ynew.csv', index = None, header=True)
+
