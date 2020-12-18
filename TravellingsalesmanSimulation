@@ -1,0 +1,47 @@
+#Part 1 
+"""
+Created on Wed Dec 16 21:53:57 2020
+
+@author: Sidharth
+"""
+from random import choice
+
+class walk_main:
+    
+    def __init__(self,limit=40):
+        self.limit = limit
+        self.x_value = [0]
+        self.y_value = [0]
+        
+    def fill_walk(self):
+        z=0
+        while len(self.x_value)<self.limit:
+            x=choice([-1,1])
+            y=choice([-1,1])
+            x_distance=choice([0,1,2,3])
+            y_distance=choice([0,1,2,3])
+            x_step=self.x_value[z-1]+ x*x_distance
+            y_step=self.x_value[z-1]+ y*y_distance
+            self.x_value.append(x_step)
+            self.y_value.append(y_step)
+            z=z+1
+        
+       
+        
+        
+ # Part 1 
+ 
+ import matplotlib.pyplot as plt
+
+from random_walk_1 import walk_main
+
+   # Make a random walk.
+rw = walk_main()
+rw.fill_walk()
+
+   # Plot the points in the walk.
+plt.style.use('classic')
+fig, ax = plt.subplots()
+ax.scatter(rw.x_value, rw.y_value, s=15)
+plt.show()
+
