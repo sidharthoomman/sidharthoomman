@@ -1,0 +1,43 @@
+# This is a data generator for an EA interview that I created, that creats 80k data points in CSV format based on some rules like - I have 240 Artisits, they transition from one project to another
+# during the course of a year; the data is a daily engagement data. This way I could build visualization on top of it. Enjoy 
+# One other comment - I am starting to really love Python and making it my to go language - be it home automation, creating RDC, (its crap for visualization), or just generating data
+# points like the one below. Me being a data analyst - I know the pain of cleaning data. But almost always data cleaning has rules and almost always they can be automated. 
+
+import pandas as pd
+import csv
+import numpy
+import datetime
+import random as rd
+data=pd.DataFrame(columns=['Date','Artist','Project','Skill'])
+print(data)
+count=0
+artist_in=1
+roles=['UI Designer','Graphics Designer','Project Manager','Animator','SX Tech','Audio Tech']
+while (artist_in<241):
+    date_in=datetime.datetime(2020,1,1)
+    Artist="Artist"+str(artist_in)
+    Role=(random.choice(roles))
+    Project1=rd.randint(1,16)
+    Project2=rd.randint(1,16)
+    X=rd.randint(1,265) #project 1  start
+    Y=rd.randint(30,61) #redployment
+    Z=(365-X-Y)
+    Str_dt=datetime.datetime(2020,1,1)
+    P1_dt=Str_dt # Project 1 Date
+    Re_St=Str_dt+datetime.timedelta(X) # Redepoyment Date
+    P2_dt=Str_dt+datetime.timedelta(X+Y) # Project 2 Date 
+    while (date_in<=datetime.datetime(2020,12,31)):
+        A1=date_in.date()
+        if date_in<=Re_St:
+            A3=("Project"+str(Project1))
+        elif date_in<=P2_dt:
+                A3="Redeployed"
+        else:
+            A3=("Project"+str(Project2))
+        
+        A2=Artist
+        A4=Role
+        List_Append=(A1,A2,A3,A4)
+        data=data.append({'Date':A1, 'Artist':A2,'Project':A3,'Skill':A4 }, ignore_index=True)
+        date_in+=datetime.timedelta(days=1)
+    artist_in=artist_in+1
