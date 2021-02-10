@@ -1,7 +1,7 @@
-# This is a data generator for an EA interview that I created, that creats 80k data points in CSV format based on some rules like - I have 240 Artisits, they transition from one project to another
-# during the course of a year; the data is a daily engagement data. This way I could build visualization on top of it. Enjoy 
-# One other comment - I am starting to really love Python and making it my to go language - be it home automation, creating RDC, (its crap for visualization), or just generating data
-# points like the one below. Me being a data analyst - I know the pain of cleaning data. But almost always data cleaning has rules and almost always they can be automated. 
+# This is a data generator for an EA interview that I created, that creats 484k data points in CSV format based on some rules that I made up- I have 240 Artisits, they transition from one project to another
+# during the course of a year; the data is a daily engagement data broken up by skill. Sole purposes of this was to mock up a few visualizations. 
+# I love the funcationality of Python to generate and clean data (apart from home automation, creating Remote Desktop etc,(not a big fan for visualization)
+# Please do look into Python to automate your data cleaning (I have found it very helpful)
 
 import pandas as pd
 import csv
